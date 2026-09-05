@@ -41,7 +41,23 @@ The generic worker script is `scripts/render_frames.py`; the older `render_ref2_
 The local still is `outputs/ref-1/ref-1-still.png`, and the still-camera project is `outputs/ref-1/ref-1-reconstruction.blend`.
 The construction scripts run in Blender in this order: `build_ref1.py`, `refine_ref1.py`, `polish_ref1.py`, `finish_ref1.py`, and `animate_ref1.py`.
 
-## Local integration
+## Video-based music room
+
+[scenes/music-room-reconstruction.blend](scenes/music-room-reconstruction.blend) reconstructs the visible corner in [2SICH's room video](https://www.youtube.com/watch?v=8c6tw_JbGRg).
+The frontal guitar view and oblique keyboard view establish the shared sofa, oval glass desk, rubber plant, green desk lighting, patterned rug, and window-side keyboard.
+Split-screen composites repeat these views rather than showing independent room positions.
+The night window includes actual reflective glazing in the reconstruction.
+
+This is an editable visual approximation, not a measured scan.
+Room dimensions, unseen walls, and the resting positions of instruments are inferred.
+The project stores those assumptions as scene properties and includes a wide camera plus two reference-oriented cameras.
+The person is omitted to expose the room geometry.
+
+Run `build_video_room.py` and then `polish_video_room.py` inside Blender to rebuild the scene.
+Run `render_video_room_views.py` in background Blender with the saved project to produce the wide, frontal, and keyboard stills.
+Local deliveries are under `outputs/video-room/`.
+
+## Local integration setup
 
 1. Open **Blender 5.2** from the Windows Start Menu.
 2. Start a fresh Codex session in this project so it loads the project-local `blender` MCP server.
