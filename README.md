@@ -57,7 +57,20 @@ Run `build_video_room.py` and then `polish_video_room.py` inside Blender to rebu
 Run `render_video_room_views.py` in background Blender with the saved project to produce the wide, frontal, and keyboard stills.
 Local deliveries are under `outputs/video-room/`.
 
-## Local integration setup
+## Gilded chapel from the eight-second frame
+
+[scenes/gilded-chapel-reconstruction.blend](scenes/gilded-chapel-reconstruction.blend) reconstructs the chapel visible at eight seconds in [Polyphia's POWER IN THE BLOOD video](https://www.youtube.com/watch?v=fDltPLFdkYI&t=8s).
+The scene includes linked acanthus relief panels, spiral columns, the stepped tabernacle, teal altar frontal, polychrome statues, candles, and the winged sunburst.
+Materials and carved details are procedural and editable.
+The local reference capture was verified at `currentTime=8` with a 1920-pixel video frame.
+
+This is a visual architectural approximation from one frame.
+Sculptures, painted panels, and intricate carvings are interpretations rather than exact replicas, and hidden dimensions are inferred.
+The foreground performer is omitted so the room can be inspected.
+Build with `scripts/build_gilded_chapel.py`, then run `scripts/refine_gilded_chapel.py` once in the new scene.
+The final still is `outputs/polyphia-room/gilded-chapel-still.png`.
+
+## Local Blender integration
 
 1. Open **Blender 5.2** from the Windows Start Menu.
 2. Start a fresh Codex session in this project so it loads the project-local `blender` MCP server.
