@@ -70,6 +70,14 @@ The foreground performer is omitted so the room can be inspected.
 Build with `scripts/build_gilded_chapel.py`, then run `scripts/refine_gilded_chapel.py` once in the new scene.
 The final still is `outputs/polyphia-room/gilded-chapel-still.png`.
 
+The researched revision is [scenes/gilded-chapel-refined.blend](scenes/gilded-chapel-refined.blend).
+It uses the museum's gallery and virtual tour to revise the altar iconography, floral backdrop, canopy, and column arrangement.
+The primitive Franciscan figures are replaced by a CC0 museum scan, and the six-winged Christ uses a posed CC0 anatomical mesh with custom modeled wings and drapery.
+The scan depicts a different Saint Francis sculpture, so the result remains an approximation of this church's figures.
+The original reconstruction is preserved separately.
+See [ASSET_SOURCES.md](ASSET_SOURCES.md) for provenance, licenses, limitations, and rebuild order.
+`scripts/render_refined_chapel.py` renders the revised room plus close-ups of a statue and a carved panel.
+
 ## Local Blender integration
 
 1. Open **Blender 5.2** from the Windows Start Menu.
