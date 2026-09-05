@@ -77,3 +77,29 @@ python scripts/render_job.py --encode-only \
 The merge tool rejects different scene hashes, mismatched render settings, conflicting copies of a frame, and incomplete sequences.
 The final encoder checks the complete video again.
 This workflow uses explicit frame ranges; it does not yet provide automatic load balancing or job scheduling.
+
+## Ref-1 distributed render
+
+The ref-1 service yard uses `scenes/ref-1-cinematic-pan.blend` and the generic `scripts/render_frames.py` worker.
+On September 5, 2026, its opening, middle, and closing benchmark frames took 5.1 seconds on homelab and 20.7 seconds on the local RTX 5090, including render initialization but excluding process startup.
+Steady frame times were approximately 1.3 seconds remotely and 4 to 5 seconds locally.
+The initial allocation was frames 1 through 132 on homelab and 133 through 168 locally.
+Local frame times subsequently increased, so its worker was stopped after completing frame 147 and homelab rendered the remaining frames 148 through 168.
+The final sequence therefore combines 153 homelab frames and 15 local frames.
+Both workers used the same packed scene, Blender 5.2.1, 64 Cycles samples, and OptiX.
+The same opening frame differed by about 0.10 of one 8-bit level per RGB channel between hosts, consistent with minor rendering differences rather than missing assets or different lighting.
+
+Collect the remote output into `outputs/ref-1/worker-remote`, then merge and encode:
+
+```bash
+python scripts/merge_render_frames.py \
+  --source outputs/ref-1/worker-local --source outputs/ref-1/worker-remote \
+  --output outputs/ref-1/distributed
+python scripts/render_job.py --encode-only \
+  --scene scenes/ref-1-cinematic-pan.blend --output outputs/ref-1/distributed
+```
+
+The expected delivery is `outputs/ref-1/distributed/ref-1-cinematic-pan-720p.mp4`.
+The completed video was verified as 168 frames, 1280 by 720 pixels, 24 fps, exactly seven seconds, and error-free decoding.
+All 168 source PNGs passed integrity checks before encoding.
+Workers now publish each completed PNG using an atomic rename so concurrent transfers cannot read a partially written image.

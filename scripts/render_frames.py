@@ -35,8 +35,10 @@ for frame in frames:
     path=os.path.join(folder,'frame-%04d.png'%frame)
     if os.path.exists(path) and os.path.getsize(path)>100000:
         print('SKIP frame',frame,flush=True);continue
-    scene.frame_set(frame);scene.render.filepath=path
+    temporary=path[:-4]+'.partial.png'
+    scene.frame_set(frame);scene.render.filepath=temporary
     bpy.ops.render.render(write_still=True)
+    os.replace(temporary,path)
     with open(os.path.join(out,'pan-progress.json'),'w') as f:json.dump({'frame':frame,'total':scene.frame_end,'checks':checks,'elapsed_seconds':round(time.time()-started,1)},f)
     print('FINISHED frame',frame,'elapsed',round(time.time()-started,1),flush=True)
 print('ALL REQUESTED FRAMES COMPLETE',flush=True)

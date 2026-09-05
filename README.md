@@ -30,7 +30,18 @@ For a short machine benchmark, run:
   --output ~/renders/blender-experiment/benchmark --frames 84,85,86
 ```
 
-## Use
+## Reconstructed service yard
+
+The second reconstruction is [scenes/ref-1-cinematic-pan.blend](scenes/ref-1-cinematic-pan.blend).
+It contains the prefab workshops, exterior steel stairs, blue rubble skip and trailer, abandoned vehicles, scattered debris, surrounding apartments, procedural weathering, and subtle atmospheric haze.
+Its eased camera move is also seven seconds at 24 fps and 1280 by 720 pixels.
+Use the same render command above with this scene path and a separate output directory.
+The generic worker script is `scripts/render_frames.py`; the older `render_ref2_pan.py` name remains a compatibility wrapper.
+
+The local still is `outputs/ref-1/ref-1-still.png`, and the still-camera project is `outputs/ref-1/ref-1-reconstruction.blend`.
+The construction scripts run in Blender in this order: `build_ref1.py`, `refine_ref1.py`, `polish_ref1.py`, `finish_ref1.py`, and `animate_ref1.py`.
+
+## Local integration
 
 1. Open **Blender 5.2** from the Windows Start Menu.
 2. Start a fresh Codex session in this project so it loads the project-local `blender` MCP server.
