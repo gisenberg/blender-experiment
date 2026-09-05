@@ -1,0 +1,40 @@
+"""Typeset small diegetic advertisements and a boarded graffiti panel."""
+from PIL import Image, ImageDraw, ImageFont
+import os, random
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUT=os.path.join(ROOT,'outputs','ref-2');os.makedirs(OUT,exist_ok=True)
+random.seed(3)
+def font(n,bold=False):return ImageFont.truetype('C:/Windows/Fonts/arial'+('bd' if bold else '')+'.ttf',n)
+im=Image.new('RGB',(600,900),(205,201,179));d=ImageDraw.Draw(im)
+d.rectangle((22,20,578,878),fill=(225,224,205));d.text((80,65),'Хренсним',font=font(61,True),fill=(33,43,38))
+d.text((125,141),'форте 10000',font=font(41,True),fill=(137,53,78))
+d.text((73,209),'Для желудка незаменим!',font=font(26,True),fill=(59,66,44))
+d.polygon([(26,315),(575,280),(575,875),(26,875)],fill=(25,111,68))
+d.rectangle((98,398,249,730),fill=(189,213,170),outline=(225,230,209),width=6)
+d.rectangle((106,419,241,489),fill=(231,230,204));d.text((113,435),'ФОРТЕ',font=font(25,True),fill=(36,114,79))
+d.ellipse((138,518,202,583),fill=(222,224,196),outline=(167,183,150),width=4)
+d.polygon([(98,730),(249,730),(293,765),(127,772)],fill=(191,205,170))
+for i in range(7):
+    d.text((302,423+i*38),['Быстрое действие','Комфорт каждый день','Надёжная формула','Забота о здоровье','После приёма пищи','Проверено временем','10000 единиц'][i],font=font(18),fill=(204,218,168))
+d.text((65,815),'СПРОСИТЕ В АПТЕКАХ ГОРОДА',font=font(23,True),fill=(218,221,179))
+im.save(os.path.join(OUT,'pharmacy.png'))
+im=Image.new('RGB',(600,900),(156,141,112));d=ImageDraw.Draw(im)
+for y in [15,305,610]:
+    d.rectangle((22,y,580,y+270),fill=(181,173,148),outline=(107,88,65),width=5)
+    d.rectangle((45,y+20,552,y+85),fill=(110,37,27));d.text((67,y+32),'ВНИМАНИЕ',font=font(47,True),fill=(188,175,141))
+    d.text((59,y+109),'АРЕНДА',font=font(64,True),fill=(70,62,48))
+    d.text((58,y+190),'ТОРГОВЫХ ПЛОЩАДЕЙ',font=font(26,True),fill=(81,70,54))
+    d.text((90,y+228),'+7 (495) 784-21-00',font=font(28),fill=(99,48,31))
+for i in range(80):
+    x=random.randrange(600);y=random.randrange(900);d.line((x,y,x+random.randrange(-25,25),y+random.randrange(20,130)),fill=(126,112,90),width=1)
+im.save(os.path.join(OUT,'events.png'))
+im=Image.new('RGB',(600,1000),(115,88,51));d=ImageDraw.Draw(im)
+for i in range(1700):
+    x=random.randrange(600);y=random.randrange(1000);d.line((x,y,x+random.randrange(-5,5),y+random.randrange(10,100)),fill=random.choice([(101,77,47),(126,97,56),(110,85,48)]),width=random.randrange(1,3))
+for x in [8,198,399,589]:d.line((x,0,x+5,1000),fill=(50,40,29),width=4)
+d.line([(92,190),(280,129),(150,429),(356,391),(218,673),(496,839)],fill=(25,22,19),width=36)
+d.ellipse((119,430,410,690),outline=(29,24,20),width=30)
+d.line([(434,213),(292,700),(410,863)],fill=(34,28,21),width=33)
+d.arc((323,120,571,361),20,315,fill=(170,162,140),width=29)
+for x,y in [(90,220),(160,465),(330,560),(418,260)]:d.line((x,y,x-9,y+random.randrange(80,200)),fill=(32,27,22),width=5)
+im.save(os.path.join(OUT,'graffiti.png'))

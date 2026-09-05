@@ -1,0 +1,7 @@
+.tools/
+outputs/
+__pycache__/
+.codex/
+*.blend1
+*.blend2
+ref-*.jpg
