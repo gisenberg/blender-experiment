@@ -21,6 +21,7 @@ python3 scripts/render_job.py \
 
 The job resumes existing frames and verifies the finished MP4's resolution, frame count, duration, and decoding.
 The output directory contains `ref-2-cinematic-pan-720p.mp4`, `pan-verification.json`, and the lossless frame sequence.
+See [RENDERING.md](RENDERING.md) for portable Linux installation and the reusable render-box workflow.
 For a short machine benchmark, run:
 
 ```bash
